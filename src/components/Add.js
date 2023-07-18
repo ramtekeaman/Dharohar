@@ -36,7 +36,7 @@ export default function Add() {
   const [Fid, setFid] = useState([]);
 
   const loadFid = async () => {
-    const result = await axios.get("http://localhost/archaeoshop/getid.php");
+    const result = await axios.get("http://shopdb.42web.io/archaeoshop/getid.php");
     setFid(result.data.phpresult);
     console.log(result.data.phpresult);
     setId(result.data.phpresult[0]['id']);
@@ -108,7 +108,7 @@ export default function Add() {
       alert("Artifact added successfully");
       setid1(document.getElementById("trno").value);
       console.log("ew" + id1);
-      const url = 'http://localhost/archaeoshop/add.php';
+      const url = 'http://shopdb.42web.io/archaeoshop/add.php';
       let fData = new FormData();
       fData.append('qrid', qrid);
       fData.append('id', id);

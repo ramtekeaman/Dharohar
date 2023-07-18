@@ -17,7 +17,7 @@ export default function Success() {
   const [qrid, setQrid] = useState();
   const [price, setPrice] = useState();
   const loadArtifacts = async () => {
-    const result = await axios.get("http://localhost/archaeoshop/latestUser.php");
+    const result = await axios.get("http://shopdb.42web.io/archaeoshop/latestUser.php");
     setArtifact(result.data.phpresult);
     console.log(result.data.phpresult);
     let str = "Id : "+result.data.phpresult[0]['id']+" |\n Name : "+result.data.phpresult[0]['name']+" |\n Condition : "+result.data.phpresult[0]['conditions']+" |\nDescription : "+result.data.phpresult[0]['description']+" |\nMaterial : "+result.data.phpresult[0]['material']+" |\nOrigin : "+result.data.phpresult[0]['origin']+" |\nPrice : "+result.data.phpresult[0]['price']+" |\nRarity : "+result.data.phpresult[0]['rarity']+" |\nQR ID : "+result.data.phpresult[0]['qrid'];

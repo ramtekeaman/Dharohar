@@ -12,9 +12,9 @@ export default function Invoice() {
 
 
   const fetchData = async() => { 
-    const result = await axios.get("http://localhost/archaeoshop/getInvoice.php");
+    const result = await axios.get("http://shopdb.42web.io/archaeoshop/getInvoice.php");
     console.log(result.data.phpresult);
-    document.getElementById("p_img").src = "http://localhost/archaeoshop/uploads/"+result.data.phpresult[0]['image'];
+    document.getElementById("p_img").src = "http://shopdb.42web.io/archaeoshop/uploads/"+result.data.phpresult[0]['image'];
      document.getElementById("name").innerHTML = result.data.phpresult[0]['name'];
     document.getElementById("cno").innerHTML = result.data.phpresult[0]['contact']; 
     document.getElementById("email").innerHTML = result.data.phpresult[0]['email']; 
