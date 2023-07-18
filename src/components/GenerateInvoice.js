@@ -37,7 +37,7 @@ export default function GenerateInvoice() {
   }
 
   const fetchData = async() => { 
-      const result = await axios.get("http://shopdb.42web.io/archaeoshop/invoicefetch.php?qrid="+qrid);
+      const result = await axios.get("http://localhost/archaeoshop/invoicefetch.php?qrid="+qrid);
       setArtifact(result.data.phpresult);
       console.log(result.data.phpresult);
       document.getElementById("pname").value = result.data.phpresult[0]['name'];
@@ -75,7 +75,7 @@ export default function GenerateInvoice() {
       alert("Product cost has been left blank!");
     }  else {
       //alert("Invoice Generated");
-      const url = 'http://shopdb.42web.io/archaeoshop/addInvoice.php';
+      const url = 'http://localhost/archaeoshop/addInvoice.php';
       let fData = new FormData();
       fData.append('name', name);
       fData.append('email', email);

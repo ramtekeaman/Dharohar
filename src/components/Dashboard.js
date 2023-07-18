@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [artifact, setArtifact] = useState([]);
 
   const loadArtifacts = async () => {
-    const result = await axios.get("http://shopdb.42web.io/archaeoshop/displayall.php");
+    const result = await axios.get("http://localhost/archaeoshop/displayall.php");
     setArtifact(result.data.phpresult);
     console.log(result.data.phpresult); 
   }

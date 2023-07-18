@@ -108,7 +108,7 @@ export default function Add() {
       alert("Artifact added successfully");
       setid1(document.getElementById("trno").value);
       console.log("ew" + id1);
-      const url = 'http://shopdb.42web.io/archaeoshop/add.php';
+      const url = 'http://localhost/archaeoshop/add.php';
       let fData = new FormData();
       fData.append('qrid', qrid);
       fData.append('id', id);
