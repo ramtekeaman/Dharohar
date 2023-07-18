@@ -19,7 +19,7 @@ export default function Success() {
     const result = await axios.get("http://localhost/archaeoshop/latestUser.php");
     setArtifact(result.data.phpresult);
     console.log(result.data.phpresult);
-    let str = result.data.phpresult[0]['id']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['conditions']+","+result.data.phpresult[0]['description']+","+result.data.phpresult[0]['material']+","+result.data.phpresult[0]['origin']+","+result.data.phpresult[0]['price']+","+result.data.phpresult[0]['rarity'];
+    let str = "Id : "+result.data.phpresult[0]['id']+" |\n Name : "+result.data.phpresult[0]['name']+" |\n Condition : "+result.data.phpresult[0]['conditions']+" |\nDescription : "+result.data.phpresult[0]['description']+" |\nMaterial : "+result.data.phpresult[0]['material']+" |\nOrigin : "+result.data.phpresult[0]['origin']+" |\nPrice : "+result.data.phpresult[0]['price']+" |\nRarity : "+result.data.phpresult[0]['rarity'];
     console.log(str);
     setValue(str);
     setName(result.data.phpresult[0]['name']);
