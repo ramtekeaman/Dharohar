@@ -29,10 +29,21 @@ export default function Invoice() {
     document.getElementById("fprice").innerHTML = result.data.phpresult[0]['fprice']; 
 }
 
+function printDiv() {
+  var divContents = document.getElementById("receipt_div").innerHTML;
+  var a = window.open('', '', 'height=800, width=800');
+  a.document.write('<html>');
+  a.document.write('<body >');
+  a.document.write(divContents);
+  a.document.write('</body></html>');
+  a.document.close();
+  a.print();
+}
+
   return (
     <>
       <br></br><br></br>
-      <div className='receipt_div shadow-lg mb-5 bg-body-tertiary rounded'>
+      <div className='receipt_div shadow-lg mb-5 bg-body-tertiary rounded' id="receipt_div">
         <div className='col-12 b_line'>
         </div>
         <div className='col-12 r_line'>
@@ -121,6 +132,7 @@ export default function Invoice() {
           <div className='col-12 b_line2'>
         </div>
       </div>
+      {/* <center><button type="button" class="btn btn-primary" onClick={printDiv}>Print</button></center> */}
     </>
   )
 }

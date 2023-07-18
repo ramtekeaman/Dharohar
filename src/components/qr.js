@@ -15,15 +15,17 @@ export default function Success() {
   const [artifact, setArtifact] = useState([]);
   const [name, setName] = useState();
   const [qrid, setQrid] = useState();
+  const [price, setPrice] = useState();
   const loadArtifacts = async () => {
     const result = await axios.get("http://localhost/archaeoshop/latestUser.php");
     setArtifact(result.data.phpresult);
     console.log(result.data.phpresult);
-    let str = "Id : "+result.data.phpresult[0]['id']+" |\n Name : "+result.data.phpresult[0]['name']+" |\n Condition : "+result.data.phpresult[0]['conditions']+" |\nDescription : "+result.data.phpresult[0]['description']+" |\nMaterial : "+result.data.phpresult[0]['material']+" |\nOrigin : "+result.data.phpresult[0]['origin']+" |\nPrice : "+result.data.phpresult[0]['price']+" |\nRarity : "+result.data.phpresult[0]['rarity'];
+    let str = "Id : "+result.data.phpresult[0]['id']+" |\n Name : "+result.data.phpresult[0]['name']+" |\n Condition : "+result.data.phpresult[0]['conditions']+" |\nDescription : "+result.data.phpresult[0]['description']+" |\nMaterial : "+result.data.phpresult[0]['material']+" |\nOrigin : "+result.data.phpresult[0]['origin']+" |\nPrice : "+result.data.phpresult[0]['price']+" |\nRarity : "+result.data.phpresult[0]['rarity']+" |\nQR ID : "+result.data.phpresult[0]['qrid'];
     console.log(str);
     setValue(str);
     setName(result.data.phpresult[0]['name']);
     setQrid(result.data.phpresult[0]['qrid'])
+    setPrice(result.data.phpresult[0]['price']);
     }
 
   
@@ -40,13 +42,25 @@ export default function Success() {
     </tr>
   )}
 
+  function printDiv() {
+      var divContents = document.getElementById("qrdiv").innerHTML;
+      var a = window.open('', '', 'height=800, width=800');
+      a.document.write('<html>');
+      a.document.write('<body >');
+      a.document.write(divContents);
+      a.document.write('</body></html>');
+      a.document.close();
+      a.print();
+  }
+
   return (
     <>
-         <center>
+         
             <div>
+            <center>
             <br></br><br></br>
-            <div class="card shadow-lg p-3 mb-5 bg-body rounded" style={{width: '18rem', padding:'20px', width:'350px', marginTop:'20px'  }}>
-            <br></br>
+            <div class="card shadow-lg p-3 mb-5 bg-body rounded" id="qrdiv" style={{width: '18rem', padding:'20px', width:'350px', marginTop:'20px'  }}>
+            <center><br></br>
               <div className='card-img-top'>
                 {value && (
                   <QRCode
@@ -60,12 +74,15 @@ export default function Success() {
                 )}
               </div>
               <div class="card-body">
-                <h5 class="card-title">{name}</h5>
-                <h5 class="card-title">{qrid}</h5>
+                <h5 class="card-title">Name : {name}</h5>
+                <h5 class="card-title">Qr ID : {qrid}</h5>
+                <h5 className='card-title'>Price (₹) : {price}/-</h5>
               </div>
+              </center>
             </div>
+            <button type="button" class="btn btn-primary" onClick={printDiv}>Print</button>  </center>
             </div>
-          </center>
+        
     </>
   )
 }

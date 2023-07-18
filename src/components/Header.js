@@ -10,7 +10,7 @@ export default function Header() {
     <>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid nav" style={{padding:'0px'}}>
-                <a class="navbar-brand ms-5 logoname" href="#">𝓐𝓻𝓬𝓱𝓪𝓮𝓸𝓼𝓱𝓸𝓹</a>
+                <a class="navbar-brand ms-5 logoname" href="#">Hola</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
