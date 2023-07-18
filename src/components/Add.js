@@ -36,7 +36,7 @@ export default function Add() {
   const [Fid, setFid] = useState([]);
 
   const loadFid = async () => {
-    const result = await axios.get("http://shopdb.42web.io/archaeoshop/getid.php");
+    const result = await axios.get("http://localhost/archaeoshop/getid.php");
     setFid(result.data.phpresult);
     console.log(result.data.phpresult);
     setId(result.data.phpresult[0]['id']);
