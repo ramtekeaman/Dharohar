@@ -83,7 +83,6 @@ export default function GenerateInvoice() {
       fData.append('fprice', fprice);
       fData.append('discount', damount);
       fData.append('image', image);
-      alert(image);
       console.log(fData);
       axios.post(url, fData)
         .then(response => alert(response.data))
@@ -176,7 +175,7 @@ export default function GenerateInvoice() {
           <div className="mb-3">
             <label className="form-label">Discount</label>
             <div style={{display:'flex'}}>
-              <input type="text" className="form-control" id="discount" style={{width:'280%'}} onChange={(e) => setDAmount(e.target.value)} /> &nbsp;&nbsp;&nbsp;
+              <input type="text" className="form-control" id="discount" style={{width:'280%'}}  placeholder='In Rupees for eg : 200' onChange={(e) => setDAmount(e.target.value)} /> &nbsp;&nbsp;&nbsp;
               <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={(e) => {addDiscount()}}>Add Discount</button>
             </div>  
           </div>
