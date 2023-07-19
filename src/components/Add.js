@@ -181,7 +181,7 @@ export default function Add() {
           </div>
           <br /><br />
           <center>  
-            <button type="submit" id="btn1" className="btn btn-primary1" onClick={() => { onAdd() }}>Submit</button>
+            <button type="button" id="btn1" className="btn btn-primary1" onClick={() => { onAdd() }}>Submit</button>
           </center>
         </form>
       </div>
