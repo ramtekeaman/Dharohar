@@ -132,7 +132,7 @@ export default function GenerateInvoice() {
         <center><h3 className="sp1">Generate Invoice</h3></center>
         <form >
           <div className="mb-3">
-            <label className="form-label" >Customer Name</label>
+            <label className="form-label" >Customer Name<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="name" onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="mb-3">
@@ -148,22 +148,22 @@ export default function GenerateInvoice() {
             <input type="text" className="form-control" id="address"  onChange={(e) => setAddress(e.target.value)}/>
           </div>
           <div className="mb-3">
-            <label className="form-label">Product QR ID</label>
+            <label className="form-label">Product QR ID<span style={{color:'red'}}>*</span></label>
             <div style={{display:'flex'}}>
               <input type="text" className="form-control" id="qrid" style={{width:'280%'}} onChange={(e) => setQrid(e.target.value)} /> &nbsp;&nbsp;&nbsp;
               <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={() => {fetchData()}}>Fetch data</button>
             </div>
           </div>
           <div className="mb-3">
-            <label className="form-label">Product Name</label>
+            <label className="form-label">Product Name<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="pname" onChange={(e) => setPname(e.target.value)}/>
           </div>
           <div className="mb-3">
-            <label className="form-label">Product ID</label>
+            <label className="form-label">Product ID<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="pid" onChange={(e) => setId(e.target.value)}/>
           </div>
           <div className="mb-3">
-            <label className="form-label">Product Cost</label>
+            <label className="form-label">Product Cost<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="pcost" onChange={(e) => setPrice(e.target.value)}/>
           </div>
           <div className="mb-3">
@@ -181,7 +181,7 @@ export default function GenerateInvoice() {
             </div>  
           </div>
           <div className="mb-3">
-            <label className="form-label">Final Price</label>
+            <label className="form-label">Final Price<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="finalp" disabled/>
           </div>
 

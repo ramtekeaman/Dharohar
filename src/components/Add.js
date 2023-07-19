@@ -72,7 +72,7 @@ export default function Add() {
   const [material, setMaterial] = useState('-');
   const [condition, setCondition] = useState('-');
   const [rarity, setRarity] = useState('-');
-  const [price, setPrice] = useState('-');
+  const [price, setPrice] = useState('');
   const [qrid, setQrid] = useState('');
   const [imgstatus, setImgstatus] = useState('0');
   
@@ -85,11 +85,13 @@ export default function Add() {
  
 
   const onAdd = () => {
-
-        files = document.getElementById("fileup").files;
-        console.log("files\n");
-        console.log(files[0]['name']);
-        console.log("files\n");
+    if (price.length === 0) {
+      alert("Price has been left blank!");
+    }   else {
+      files = document.getElementById("fileup").files;
+      console.log("files\n");
+      console.log(files[0]['name']);
+      console.log("files\n");
 
       alert("Artifact added successfully");
       setid1(document.getElementById("trno").value);
@@ -114,14 +116,14 @@ export default function Add() {
         });
 
       handleClick();
-    
+      }
   }
 
   return (
     <>
       <br /><br />
       <div className="container" style={container}>
-        <center><h3 className="sp1">Add Artifacts</h3></center>
+        <center><h3 className="sp1">Add Artifacts </h3></center>
         <form>
           <div className="mb-3">
             <label className="form-label">Artifact ID</label>
@@ -151,7 +153,7 @@ export default function Add() {
           
           </div>
           <div className="mb-4">
-            <label className="form-label me-3">Upload Image</label>
+            <label className="form-label me-3">Upload Image<span style={{color:'red'}}>*</span></label>
             <input type="file" id="fileup" onChange={onFileChange} />
           </div>
           <div className="mb-3">
@@ -174,11 +176,11 @@ export default function Add() {
             </select>
           </div>
           <div className="mb-3">
-            <label className="form-label">Artifact Price</label>
+            <label className="form-label">Artifact Price<span style={{color:'red'}}>*</span></label>
             <input type="number" className="form-control" id="price" onChange={(e) => setPrice(e.target.value)} />
           </div>
           <br /><br />
-          <center>
+          <center>  
             <button type="submit" id="btn1" className="btn btn-primary1" onClick={() => { onAdd() }}>Submit</button>
           </center>
         </form>
