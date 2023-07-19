@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import dum from "./images/dummy.jpeg";
 import "./css/Add.css"
 
 let container = {
@@ -19,6 +20,9 @@ export default function Add() {
   let files;
 
   const onFileChange = (e) => {
+
+    setImgstatus('1');
+
     files = document.getElementById("fileup").files;
     let fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
@@ -61,16 +65,16 @@ export default function Add() {
     }
 
   const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [desc, setDesc] = useState('');
-  const [age, setAge] = useState('');
-  const [origin, setOrigin] = useState('');
-  const [material, setMaterial] = useState('');
-  const [condition, setCondition] = useState('');
-  const [rarity, setRarity] = useState('');
-  const [price, setPrice] = useState('');
+  const [name, setName] = useState('-');
+  const [desc, setDesc] = useState('-');
+  const [age, setAge] = useState('-');
+  const [origin, setOrigin] = useState('-');
+  const [material, setMaterial] = useState('-');
+  const [condition, setCondition] = useState('-');
+  const [rarity, setRarity] = useState('-');
+  const [price, setPrice] = useState('-');
   const [qrid, setQrid] = useState('');
-
+  const [imgstatus, setImgstatus] = useState('0');
   
   const navigate = useNavigate();
 
@@ -82,28 +86,10 @@ export default function Add() {
 
   const onAdd = () => {
 
-    if (name.length === 0) {
-      alert("Name has been left blank!");
-    } else if (desc.length === 0) {
-      alert("Description has been left blank!");
-    } else if (age.length === 0) {
-      alert("Age has been left blank!");
-    } else if (origin.length === 0) {
-      alert("Origin has been left blank!");
-    } else if (material.length === 0) {
-      alert("Material has been left blank!");
-    } else if (condition.length === 0) {
-      alert("Condition has been left blank!");
-    } else if (rarity === 0) {
-      alert("Rarity has been left blank!");
-    } else if (price.length === 0) {
-      alert("Price has been left blank!");
-    } else {
-      
-      files = document.getElementById("fileup").files;
-      console.log("files\n");
-      console.log(files[0]['name']);
-      console.log("files\n");
+        files = document.getElementById("fileup").files;
+        console.log("files\n");
+        console.log(files[0]['name']);
+        console.log("files\n");
 
       alert("Artifact added successfully");
       setid1(document.getElementById("trno").value);
@@ -128,7 +114,7 @@ export default function Add() {
         });
 
       handleClick();
-    }
+    
   }
 
   return (
@@ -162,6 +148,7 @@ export default function Add() {
           <div className="mb-4">
             <label className="form-label">Artifact Material</label>
             <input type="text" className="form-control" id="material" onChange={(e) => setMaterial(e.target.value)} />
+          
           </div>
           <div className="mb-4">
             <label className="form-label me-3">Upload Image</label>
@@ -170,6 +157,7 @@ export default function Add() {
           <div className="mb-3">
             <label className="form-label">Artifact Condition</label>
             <select class="form-select" id="conditions" value={condition} onChange={(e) => setCondition(e.target.value)}>
+              <option>- select -</option>
               <option value="excellent">Excellent</option>
               <option value="good">Good</option>
               <option value="fair">Fair</option>
@@ -179,6 +167,7 @@ export default function Add() {
           <div className="mb-3">
             <label className="form-label">Artifact Rarity</label>
             <select class="form-select" id="rarity" value={rarity} onChange={(e) => setRarity(e.target.value)}>
+              <option>- select -</option>
               <option value="common">Common</option>
               <option value="rare">Rare</option>
               <option value="one_of_a_kind">One-of-a-kind</option>
@@ -188,7 +177,6 @@ export default function Add() {
             <label className="form-label">Artifact Price</label>
             <input type="number" className="form-control" id="price" onChange={(e) => setPrice(e.target.value)} />
           </div>
-
           <br /><br />
           <center>
             <button type="submit" id="btn1" className="btn btn-primary1" onClick={() => { onAdd() }}>Submit</button>

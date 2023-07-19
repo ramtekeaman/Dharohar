@@ -14,21 +14,21 @@ let container = {
 export default function GenerateInvoice() {
 
   const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [cno, setCno] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
+  const [name, setName] = useState('-');
+  const [cno, setCno] = useState('-');
+  const [email, setEmail] = useState('-');
+  const [address, setAddress] = useState('-');
   const [price, setPrice] = useState('');
   const [pid, setPid] = useState('');
   const [qrid, setQrid] = useState('');
   const [pname, setPname] = useState('');
   const [fprice, setFprice] = useState('');
-  const [damount, setDAmount] = useState('');
+  const [damount, setDAmount] = useState('0');
   const [gstStatus, setGststatus] = useState('0');
   const [artifact, setArtifact] = useState([]);
-  const [gst, setGst] = useState(' ');
+  const [gst, setGst] = useState('0');
   const [image, setImage] = useState('');
-  const [gstValue, setGstvalue] = useState('');
+  const [gstValue, setGstvalue] = useState('0');
   
   const navigate = useNavigate();
 
@@ -59,13 +59,7 @@ export default function GenerateInvoice() {
   const submit = () => {
     if (name.length === 0) {
       alert("Name has been left blank!");
-    } else if (email.length === 0) {
-      alert("Email has been left blank!");
-    } else if (cno.length === 0) {
-      alert("Contact has been left blank!");
-    } else if (address.length === 0) {
-      alert("Address has been left blank!");
-    } else if (qrid.length === 0) {
+    }  else if (qrid.length === 0) {
       alert("QR ID has been left blank!");
     } else if (pname.length === 0) {
       alert("Product Name has been left blank!");
