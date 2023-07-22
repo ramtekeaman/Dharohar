@@ -48,7 +48,9 @@ export default function Success() {
       var a = window.open('', '', 'height=800, width=800');
       a.document.write('<html>');
       a.document.write('<body >');
+     
       a.document.write(divContents);
+   
       a.document.write('</body></html>');
       a.document.close();
       a.print();
@@ -75,9 +77,9 @@ export default function Success() {
                 )}
               </div>
               <div class="card-body">
-                <h5 class="card-title">Name : {name}</h5>
-                <h5 class="card-title">Qr ID : {qrid}</h5>
-                <h5 className='card-title'>Price (₹) : {price}/-</h5>
+                <h3 class="card-title">Name : {name}</h3>
+                <h2 class="card-title">Qr ID : {qrid}</h2>
+                <h2 className='card-title'>Price (₹) : {price}/-</h2>
               </div>
               </center>
             </div>

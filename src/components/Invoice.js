@@ -1,5 +1,6 @@
 import React from 'react'
 import './css/Recipt.css'
+import rcss from './css/Recipt.css'
 import axios from 'axios';
 import  {useState, useEffect} from 'react';
 import img1 from './images/img1.png';
@@ -30,14 +31,18 @@ export default function Invoice() {
 }
 
 function printDiv() {
-  var divContents = document.getElementById("receipt_div").innerHTML;
+ /*  var divContents = document.getElementById("receipt_div").innerHTML;
   var a = window.open('', '', 'height=800, width=800');
   a.document.write('<html>');
+  a.document.write('<head>');
+  a.document.write( "<link rel=\"stylesheet\" href=\"./css/Recipt.css\" type=\"text/css\"/>" );
+  a.document.write('</head>');
   a.document.write('<body >');
   a.document.write(divContents);
   a.document.write('</body></html>');
   a.document.close();
-  a.print();
+  a.print(); */
+  window.print();
 }
 
   return (
@@ -132,7 +137,7 @@ function printDiv() {
           <div className='col-12 b_line2'>
         </div>
       </div>
-      {/* <center><button type="button" class="btn btn-primary" onClick={printDiv}>Print</button></center> */}
+      <center><button type="button" class="btn btn-primary" onClick={printDiv}>Print</button></center>
     </>
   )
 }
