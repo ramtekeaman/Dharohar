@@ -59,10 +59,10 @@ export default function Success() {
   return (
     <>
          
-            <div>
+            <div id="qrdiv">
             <center>
             <br></br><br></br>
-            <div class="card shadow-lg p-3 mb-5 bg-body rounded" id="qrdiv" style={{width: '18rem', padding:'20px', width:'350px', marginTop:'20px'  }}>
+            <div class="card shadow-lg p-3 mb-5 bg-body rounded"  style={{width: '18rem', padding:'20px', width:'350px', marginTop:'20px', border: 'solid 1px black' }}>
             <center><br></br>
               <div className='card-img-top'>
                 {value && (
@@ -73,7 +73,6 @@ export default function Success() {
                       fgColor={fore}
                       size={size === '' ? 0 : size}
                   />
-
                 )}
               </div>
               <div class="card-body">
@@ -83,8 +82,9 @@ export default function Success() {
               </div>
               </center>
             </div>
-            <button type="button" class="btn btn-primary" onClick={printDiv}>Print</button>  </center>
+            </center>
             </div>
+            <center> <button type="button" class="btn btn-primary" onClick={printDiv}>Print</button> </center>  
         
     </>
   )
