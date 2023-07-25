@@ -48,9 +48,7 @@ export default function Success() {
       var a = window.open('', '', 'height=800, width=800');
       a.document.write('<html>');
       a.document.write('<body >');
-     
       a.document.write(divContents);
-   
       a.document.write('</body></html>');
       a.document.close();
       a.print();
@@ -76,7 +74,6 @@ export default function Success() {
                 )}
               </div>
               <div class="card-body">
-                <h2 class="card-title">Name : {name}</h2>
                 <h1 class="card-title">Qr ID : {qrid}</h1>
                 <h1 className='card-title'>Price (₹) : {price}/-</h1>
               </div>
@@ -84,8 +81,7 @@ export default function Success() {
             </div>
             </center>
             </div>
-            <center> <button type="button" class="btn btn-primary" onClick={printDiv}>Print</button> </center>  
-        
+            <center> <button type="button" class="btn btn-primary" onClick={printDiv}>Print</button> </center>    
     </>
   )
 }
