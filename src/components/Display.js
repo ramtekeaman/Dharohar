@@ -6,6 +6,9 @@ export default function Display(props) {
 
     const { id } = useParams();
     const [artifact, setArtifact] = useState([]);
+
+
+
 /* 
     fetch('http://localhost/archaeoshop/display1.php', {
       method: 'POST',
@@ -44,9 +47,6 @@ export default function Display(props) {
           const result = await axios.get("http://localhost/archaeoshop/display.php?id="+id);
           setArtifact(result.data.phpresult);
           console.log(result.data.phpresult);
-          let str = result.data.phpresult[0]['id']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['conditions']+","+result.data.phpresult[0]['description']+","+result.data.phpresult[0]['material']+","+result.data.phpresult[0]['origin']+","+result.data.phpresult[0]['price']+","+result.data.phpresult[0]['rarity'];
-          console.log(str); 
-      
     
       }
       useEffect(() => {

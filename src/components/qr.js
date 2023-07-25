@@ -76,9 +76,9 @@ export default function Success() {
                 )}
               </div>
               <div class="card-body">
-                <h3 class="card-title">Name : {name}</h3>
-                <h2 class="card-title">Qr ID : {qrid}</h2>
-                <h2 className='card-title'>Price (₹) : {price}/-</h2>
+                <h2 class="card-title">Name : {name}</h2>
+                <h1 class="card-title">Qr ID : {qrid}</h1>
+                <h1 className='card-title'>Price (₹) : {price}/-</h1>
               </div>
               </center>
             </div>
