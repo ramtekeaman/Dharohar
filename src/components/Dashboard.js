@@ -83,7 +83,6 @@ export default function Dashboard() {
                     </table>
                 </div>                 
           </div>
-          
     </>
   )
 }

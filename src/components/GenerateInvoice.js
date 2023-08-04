@@ -11,7 +11,7 @@ let container = {
   marginLeft: '20%'
 };
 
-export default function GenerateInvoice() {
+export default function GenerateInvoice({cart,setCart}) {
 
   const [id, setId] = useState('');
   const [name, setName] = useState('-');
@@ -22,38 +22,35 @@ export default function GenerateInvoice() {
   const [pid, setPid] = useState('');
   const [qrid, setQrid] = useState('');
   const [pname, setPname] = useState('');
-  const [fprice, setFprice] = useState('');
+  const [fprice, setFprice] = useState('0');
   const [damount, setDAmount] = useState('0');
   const [gstStatus, setGststatus] = useState('0');
+  const [tamount, setTamount] = useState('0');
   const [artifact, setArtifact] = useState([]);
   const [gst, setGst] = useState('0');
   const [image, setImage] = useState('');
   const [gstValue, setGstvalue] = useState('0');
-  
+
   const navigate = useNavigate();
 
   function handleClick() {
     navigate("/Invoice");
   }
 
+
+
   const fetchData = async() => { 
       const result = await axios.get("http://localhost/archaeoshop/invoicefetch.php?qrid="+qrid);
       setArtifact(result.data.phpresult);
-      console.log(result.data.phpresult);
-      document.getElementById("pname").value = result.data.phpresult[0]['name'];
-      document.getElementById("pname").disabled = true;
+    
       setPname(result.data.phpresult[0]['name']);
-      document.getElementById("pid").value = result.data.phpresult[0]['id'];
-      document.getElementById("pid").disabled = true;
       setId(result.data.phpresult[0]['id']);
-      document.getElementById("pcost").value = result.data.phpresult[0]['price'];
-      document.getElementById("pcost").disabled = true;
       setPrice(result.data.phpresult[0]['price']);
-      let str = result.data.phpresult[0]['id']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['name']+","+result.data.phpresult[0]['conditions']+","+result.data.phpresult[0]['description']+","+result.data.phpresult[0]['material']+","+result.data.phpresult[0]['origin']+","+result.data.phpresult[0]['price']+","+result.data.phpresult[0]['rarity'];
-      console.log(str); 
       document.getElementById("finalp").value = result.data.phpresult[0]['price'];
-      setFprice(result.data.phpresult[0]['price']);
+    
       setImage(result.data.phpresult[0]['image']);
+      addCart(qrid,result.data.phpresult[0]['name'],result.data.phpresult[0]['price']);
+      calculateFprice(result.data.phpresult[0]['price'],damount,gst);
   }
 
   const submit = () => {
@@ -78,7 +75,7 @@ export default function GenerateInvoice() {
       fData.append('qrid', qrid);
       fData.append('pname', pname);
       fData.append('id', id);
-      fData.append('price', price);
+      fData.append('price', tamount);
       fData.append('gst', gst);
       fData.append('fprice', fprice);
       fData.append('discount', damount);
@@ -94,35 +91,38 @@ export default function GenerateInvoice() {
     }
   }
 
-  const addDiscount = () => {
-      var amount = parseInt(fprice)-parseInt(damount);
-      setFprice(amount);
-      document.getElementById("finalp").value = amount;
+  const calculateFprice = (cprice, cdamount, cgst) => {
+
+    var ttamount = parseInt(tamount) + parseInt(cprice);
+    setTamount(parseInt(tamount) + parseInt(cprice));
+    document.getElementById('totalid').innerHTML = ttamount;
+    var tdisc= (ttamount/100)*damount;
+    var discountedtamount = ttamount - tdisc;
+    var tgst = (discountedtamount/100)*gst;
+    setFprice(parseInt(discountedtamount)+parseInt(tgst));
+    document.getElementById('finalp').value = parseInt(discountedtamount)+parseInt(tgst);
+
   }
 
-  const addGST = () => {
-    var checkBox = document.getElementById("myCheck");
-    
-    var tgst= (price/100)*gstValue;
-
-    let fp = parseInt(price)+parseInt(damount)+parseInt(tgst);
-    setFprice(fp);
-    document.getElementById("finalp").value = fp;
-    if(gstStatus==='0')
-    {
-      //setGststatus("1");
-      setGst(parseInt(tgst));
-      document.getElementById("finalp").value = parseInt(tgst)+parseInt(fprice);
-      setFprice(parseInt(tgst)+parseInt(fprice));
-    }
-    else
-    {
-     // setGststatus("0");
-      setGst(0);
-      document.getElementById("finalp").value = price-damount;
-      setFprice(price-damount);
-    }
+  const calgstanddiscount= () =>{
+    var tdisc= (tamount/100)*damount;
+    var discountedtamount = tamount - tdisc;
+    var tgst = (discountedtamount/100)*gst;
+    setFprice(parseInt(discountedtamount)+parseInt(tgst));
+    document.getElementById('finalp').value = parseInt(discountedtamount)+parseInt(tgst);
   }
+
+  const addCart = (qridf,pnamef,pricef) => { 
+    setCart([
+      ...cart,
+      {
+        qrid: qridf,
+        pname: pnamef,
+        price: pricef
+      }
+    ]);
+  };
+  
 
   return (
     <>
@@ -153,7 +153,8 @@ export default function GenerateInvoice() {
               <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={() => {fetchData()}}>Fetch data</button>
             </div>
           </div>
-          <div className="mb-3">
+       
+         {/*  <div className="mb-3">
             <label className="form-label">Product Name<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="pname" onChange={(e) => setPname(e.target.value)}/>
           </div>
@@ -164,26 +165,59 @@ export default function GenerateInvoice() {
           <div className="mb-3">
             <label className="form-label">Product Cost<span style={{color:'red'}}>*</span></label>
             <input type="text" className="form-control" id="pcost" onChange={(e) => setPrice(e.target.value)}/>
+          </div> */}
+
+          <div className="mb-3">
+
+            <label className="form-label">Cart items:</label>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" style={{width:'25px'}}>Sr.No.</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">QR ID</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+              {cart.map((item, index) =>
+                <tr key={index}>
+                  <td>{index+1}</td>
+                  <td>{item.pname}</td>
+                  <td>{item.qrid}</td>
+                  <td>{item.price}</td>
+                </tr>
+              )}
+
+                <tr>
+                <td></td>
+                <td></td>
+                <td>Total : </td>    
+                <td><span id="totalid"><b>&nbsp;&nbsp;-</b></span></td>              
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div className="mb-3">
             <label className="form-label">GST</label>
             <div style={{display:'flex'}}>
-              <input type="text" className="form-control" id="discount" style={{width:'280%'}}  placeholder='In Percentage for eg : 10' onChange={(e) => setGstvalue(e.target.value)} /> &nbsp;&nbsp;&nbsp;
-              <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={(e) => {addGST()}}>Add GST</button>
+              <input type="text" className="form-control" id="discount" style={{width:'280%'}}  placeholder='In Percentage for eg : 10' onChange={(e) => setGst(e.target.value)} /> &nbsp;&nbsp;&nbsp;
+              <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={(e) => {calgstanddiscount()}}>Add GST</button>
             </div>  
           </div>
           <div className="mb-3">
             <label className="form-label">Discount</label>
             <div style={{display:'flex'}}>
-              <input type="text" className="form-control" id="discount" style={{width:'280%'}}  placeholder='In Rupees for eg : 200' onChange={(e) => setDAmount(e.target.value)} /> &nbsp;&nbsp;&nbsp;
-              <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={(e) => {addDiscount()}}>Add Discount</button>
+              <input type="text" className="form-control" id="discount" style={{width:'280%'}}  placeholder='In Percentage for eg : 10' onChange={(e) => setDAmount(e.target.value)} /> &nbsp;&nbsp;&nbsp;
+              <button id="btn" type='button' className="btn btn-primary1" style={{height:"7%"}} onClick={(e) => {calgstanddiscount()}}>Add Discount</button>
             </div>  
           </div>
           <div className="mb-3">
             <label className="form-label">Final Price<span style={{color:'red'}}>*</span></label>
-            <input type="text" className="form-control" id="finalp" disabled/>
+            <input type="text" className="form-control" id="finalp"  disabled/>
           </div>
-
+                
           <center>
           <button type="button" id="btn1" className="btn btn-primary1 mt-3" onClick={() => { submit() }}>Submit</button>
           </center>

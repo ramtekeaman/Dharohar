@@ -77,10 +77,9 @@ export default function Display(props) {
                     rarity : {res.rarity} <br></br>
                     price : {res.price} <br></br>
                 </div>
-            )}  
+            )}  +
             
           </div>
-
 
     </>
   )

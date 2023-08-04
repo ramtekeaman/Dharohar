@@ -17,7 +17,6 @@ export default function () {
                     <h5>First slide label</h5>
                     <p>Some representative placeholder content for the first slide.</p>
                 </div>
-                
                 </div>
                 <div class="carousel-item">
                 <img src="https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2020/05/PETRA-JORDAN-1.jpg?ssl=1" class="d-block w-100" alt="..."></img>

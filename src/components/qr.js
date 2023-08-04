@@ -23,11 +23,10 @@ export default function Success() {
     let str = "Id : "+result.data.phpresult[0]['id']+" |\n Name : "+result.data.phpresult[0]['name']+" |\n Condition : "+result.data.phpresult[0]['conditions']+" |\nDescription : "+result.data.phpresult[0]['description']+" |\nMaterial : "+result.data.phpresult[0]['material']+" |\nOrigin : "+result.data.phpresult[0]['origin']+" |\nPrice : "+result.data.phpresult[0]['price']+" |\nRarity : "+result.data.phpresult[0]['rarity']+" |\nQR ID : "+result.data.phpresult[0]['qrid'];
     console.log(str);
     setValue(str);
-   
     setName(result.data.phpresult[0]['name']);
     setQrid(result.data.phpresult[0]['qrid'])
-    setPrice(result.data.phpresult[0]['price']);
-    }
+    setPrice(result.data.phpresult[0]['price']);  
+}
 
   
 

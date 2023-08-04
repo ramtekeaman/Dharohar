@@ -4,7 +4,7 @@ import rcss from './css/Recipt.css'
 import axios from 'axios';
 import  {useState, useEffect} from 'react';
 import img1 from './images/img1.png';
-export default function Invoice() {
+export default function Invoice({cart}) {
 
   useEffect(() => {
     fetchData();
@@ -15,19 +15,21 @@ export default function Invoice() {
   const fetchData = async() => { 
     const result = await axios.get("http://localhost/archaeoshop/getInvoice.php");
     console.log(result.data.phpresult);
-    document.getElementById("p_img").src = "http://localhost/archaeoshop/uploads/"+result.data.phpresult[0]['image'];
+   /*  document.getElementById("p_img").src = "http://localhost/archaeoshop/uploads/"+result.data.phpresult[0]['image']; */
     document.getElementById("name").innerHTML = result.data.phpresult[0]['name'];
     document.getElementById("cno").innerHTML = result.data.phpresult[0]['contact']; 
     document.getElementById("email").innerHTML = result.data.phpresult[0]['email']; 
     document.getElementById("iid").innerHTML = result.data.phpresult[0]['id']; 
-    document.getElementById("pname").innerHTML = result.data.phpresult[0]['pname']; 
+    /* document.getElementById("pname").innerHTML = result.data.phpresult[0]['pname']; 
     document.getElementById("pid").innerHTML = result.data.phpresult[0]['pid']; 
     document.getElementById("price").innerHTML = result.data.phpresult[0]['price']; 
-    document.getElementById("qrid").innerHTML = result.data.phpresult[0]['pqrid']; 
+    document.getElementById("qrid").innerHTML = result.data.phpresult[0]['pqrid'];  */
     document.getElementById("pprice").innerHTML = result.data.phpresult[0]['price']; 
+    document.getElementById("totalid").innerHTML = result.data.phpresult[0]['price']; 
     document.getElementById("gst").innerHTML = result.data.phpresult[0]['gst']; 
     document.getElementById("discount").innerHTML = result.data.phpresult[0]['discount']; 
     document.getElementById("fprice").innerHTML = result.data.phpresult[0]['fprice']; 
+    document.getElementById("timestamp").innerHTML = result.data.phpresult[0]['timestamp']; 
 }
 
 function printDiv() {
@@ -59,7 +61,7 @@ function printDiv() {
           <h5 className='mt-1'>𝓐𝓻𝓬𝓱𝓪𝓮𝓸𝓼𝓱𝓸𝓹</h5>
         </center>
         <br></br><br></br>  
-        <div st >
+        <div >
           <div style={{display:'flex'}}>
             <div >
 
@@ -73,7 +75,7 @@ function printDiv() {
             <div >
 
             </div>
-            <div className='c_name' style={{marginLeft: '50%'}}>
+            <div className='c_name' style={{marginLeft: '35%'}}>
               Invoice From,<br></br>
               Archaeoshop<br></br>
               billing@archaeo.com<br></br>
@@ -83,9 +85,10 @@ function printDiv() {
         </div>
         <br></br><br></br><br></br>
         <div >
-          <div style={{display:'flex'}}>
+        <center>
+          <div>
            
-            <div style={{marginLeft: '10%'}}>
+            {/* <div style={{marginLeft: '10%'}}>
               <br></br>
               Product Details,<br></br>
               Name : <span id="pname">NA</span><br></br>
@@ -96,11 +99,41 @@ function printDiv() {
            
             <div style={{marginLeft: '42%'}}>
                 <img className='i_img mt-2'  id="p_img" style={{marginLeft:'-25px', width: '200px', border:'rgb(166, 2, 2) solid 2px', borderRadius: '10px'}} src=""></img>
-            </div>
+            </div> */}
+            
+             <table class="table" style={{width: '80%', border: '1px solid '}}>
+              <thead>
+                <tr>
+                  <th scope="col" style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '10%'}}>Sr.No.</th>
+                  <th scope="col" style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>Name</th>
+                  <th scope="col" style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>QR ID</th>
+                  <th scope="col" style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+              {cart.map((item, index) =>
+                <tr key={index}>
+                  <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '10%'}}>{index+1}</td>
+                  <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>{item.pname}</td>
+                  <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>{item.qrid}</td>
+                  <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>{item.price}</td>
+                </tr>
+              )}
+
+                <tr>
+                <td></td>
+                <td></td>
+                <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}>Total : </td>    
+                <td style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '30%'}}><span id="totalid"><b>&nbsp;&nbsp;-</b></span></td>              
+                </tr>
+              </tbody>
+            </table>
+           
         </div>
+        </center>
         </div>
         <center>
-          <br></br><br></br><br></br>
+          <br></br><br></br>
           <table style={{width: '80%', border: '1px solid '}} >
             <tbody>
               <tr>
@@ -109,11 +142,11 @@ function printDiv() {
               </tr>
               <tr>
                 <td className='l_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '70%'}}>GST</td>
-                <td className='r_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', paddingLeft: '20px'}}>&nbsp;&nbsp;&nbsp;<span id="gst">NA</span></td>
+                <td className='r_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', paddingLeft: '20px'}}>&nbsp;&nbsp;&nbsp;<span id="gst">NA</span> %</td>
               </tr>
               <tr>
                 <td className='l_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '70%'}}>Discount</td>
-                <td className='r_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', paddingLeft: '20px'}}>- <span id="discount"> NA</span></td>
+                <td className='r_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', paddingLeft: '20px'}}>- <span id="discount"> NA</span>  %</td>
               </tr>
               <tr>
                 <td className='l_col' style={{ border: '1px solid rgb(209, 209, 209)', height: '40px', paddingLeft: '20px', width: '70%'}}>Total</td>
@@ -123,7 +156,7 @@ function printDiv() {
           </table>
           <br></br>
             <div class="receipt-right">
-							<span style={{fontSize: '15px'}}><b>Date :</b> 15 Aug 2016</span>
+							<span style={{fontSize: '15px'}}><b>Date and Time :</b> <span id="timestamp">NA</span></span>
 							<h6 className='mt-1' style={{color: 'rgb(140, 140, 140)'}}>Thanks for shopping.!</h6>
 						</div>
             <br></br>

@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard';
 import Add from './components/Add';
 import Qr from './components/qr';
 import GenerateInvoice from './components/GenerateInvoice';
+import { useState, useEffect } from 'react';
 
 import {  
   BrowserRouter as Router,
@@ -19,6 +20,7 @@ import Invoice from './components/Invoice';
 
 
 function App() {
+  const [cart, setCart] = useState([]);
   return (
     <>
       <Router>
@@ -35,7 +37,7 @@ function App() {
             <Dashboard />
           }>
           </Route>
-
+ 
           <Route exact path="/Display/:id" element= {
             <>
               <Display/>
@@ -44,7 +46,7 @@ function App() {
           </Route>
           
           <Route exact path="/GenerateInvoice" element={
-            <GenerateInvoice/>
+            <GenerateInvoice cart={cart} setCart={setCart}/>
           }>
           </Route>
 
@@ -53,7 +55,7 @@ function App() {
           }></Route>
 
           <Route exact path="/Invoice" element={
-            <Invoice />
+            <Invoice cart={cart}/>
           }></Route>
 
           <Route exact path="/Qr" element={
