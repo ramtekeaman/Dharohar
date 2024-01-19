@@ -2,83 +2,70 @@ import React from 'react';
 import axios from 'axios';
 import  {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-export default function Display(props) {
+import logo from './images/logo.jpg'
+import "./css/Display.css"
+export default function Display({dbpath,vsb}) {
 
     const { id } = useParams();
     const [artifact, setArtifact] = useState([]);
 
-
-
-/* 
-    fetch('http://localhost/archaeoshop/display1.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: id }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        // Process the fetched data
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
- */
-   /*  const loadArtifacts = async () => {
-        const url='http://localhost/archaeoshop/display.php';
-        let fData = new FormData();
-        fData.append('id',id);
-        const result = axios.post(url,fData).then(response=> console.log(JSON.stringify(response.data))).catch(error=> {
-          let str = result.data.phpresult[0]['id'];
-
-          console.log(error.toJSON());
-        }) 
-      } 
-      useEffect(() => {
-        loadArtifacts();
-    }, []);   
-      */
-
     const loadArtifacts = async () => {
-
-        
-          const result = await axios.get("http://localhost/archaeoshop/display.php?id="+id);
+          const result = await axios.get(dbpath+"display.php?id="+id);
           setArtifact(result.data.phpresult);
-          console.log(result.data.phpresult);
-    
-      }
-      useEffect(() => {
-        loadArtifacts();
+          console.log(result.data.phpresult); 
+    }
+
+    const priceFormat = (price) => {
+      var lastThree = price.substring(price.length-3);
+      var otherNumbers = price.substring(0,price.length-3);
+      if(otherNumbers != '')
+          lastThree = ',' + lastThree;
+      var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+      return res;
+    }
+
+    useEffect(() => {
+      loadArtifacts();
+      vsb('0');
     }, []); 
 
-  
-
-  return (
+    return (
     <>
-        Artifact Details
-        id = {id}
+    <div className='mainDiv'>
+    <div className='submainDiv'>
+        <br />
+        <center><img src={logo} style={{width:'120px'}}/>
+        <hr />
+        <br></br>
+        <span style={{fontFamily: 'Times New Roman'}}>QRID = {id}</span>
+        <br></br><br></br>
+        
+        <hr />  
+        </center>
         <div>  
               <br></br>
-
-              <h5> details fetched </h5>
-
+              <br></br>
             {artifact.map((res)=>
                 
-                <div>
-                    id : {res.id} <br></br>
-                    name : {res.name} <br></br>
-                    desc : {res.desc} <br></br>
-                    age : {res.age} <br></br>
-                    origin : {res.origin} <br></br>
-                    material : {res.material} <br></br>
-                    condition : {res.condition} <br></br>
-                    rarity : {res.rarity} <br></br>
-                    price : {res.price} <br></br>
+                <div className='didiv'><div className='image'> 
+                    
+                    <center><img className='i_img mt-2'  id="p_img" style={{ width: '200px', border:'rgb(67,35,130) solid 2px', borderRadius: '10px'}} src={"http://test2.royalswebtech.com/archaeoshop/uploads/"+res.image}></img> </center>
+                    
+                    </div>
+                    <div className='data'>
+                    <div style={{color:'black'}}><strong style={{color:'rgb(67,35,130)'}}>Id</strong> : {res.id} <br></br>
+                    <strong style={{color:'rgb(67,35,130)'}}>Name </strong>: {res.name} <br></br>
+                    <strong style={{color:'rgb(67,35,130)'}}>Desc </strong>: {res.description} <br></br>
+                    <strong style={{color:'rgb(67,35,130)'}}>HSN Code </strong>: {res.hsncode} <br></br>
+                    <strong style={{color:'rgb(67,35,130)'}}>Price </strong>: {priceFormat(res.price)} <br></br></div>
+                    </div>
                 </div>
-            )}  +
+            )}  
             
+          </div>
+          <br></br>
+          <br></br>
+          </div>
           </div>
 
     </>

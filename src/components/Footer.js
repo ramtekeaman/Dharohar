@@ -1,21 +1,31 @@
 import React from 'react';
 import './css/Footer.css'; // Import the CSS file for styling
 
-const Footer = () => {
+const Footer = ({dbpath,setHfvisibility}) => {
   return (
-    <footer className="footer">
-      <div className="container">
-        <br></br>
-        <p className="footer-text">© 2023 Your Website. All rights reserved.</p>
-        <ul className="footer-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/services">Services</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </div>
-    </footer>
+   <>
+       <div class="copyrights hf-hide" style={{color:"black", fontWeight:'500', borderTop:'1px solid rgb(67,35,130)'}}>
+        <div class="container-fluid">
+            <div class="footer-distributed">
+                <div class="footer-left">
+                    <p class="footer-links">
+                        <a href="#">Home</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">About</a>
+                        <a href="#">Faq</a>
+                        <a href="#">Contact</a>
+                    </p>
+                    <p class="footer-company-name" style={{color:"black", fontWeight:'400'}}>All Rights Reserved. &copy; 2023 <a href="#"></a> Design By : 
+					<a href="http://royalswebtechpvtltd.com/" style={{color:'rgb(67,35,130)', fontWeight:'600'}}>  Royals Webtech Pvt. Ltd.</a></p>
+                </div>
+            </div>
+        </div> {/* <!-- end container --> */}
+    </div> {/* <!-- end copyrights --> */}
+
+    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+   </>
   );
 };
-
+ 
 export default Footer;
