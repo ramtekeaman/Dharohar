@@ -76,7 +76,7 @@ var statusLogin =() => {
               <a class="nav-link js-scroll-trigger" href="#team">Team</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contect Us</a>
+              <a class="nav-link js-scroll-trigger" href="#contact">Contact Us</a>
             </li>
             <li class="nav-item">
                 <button type="button" onClick={clickme} class="btn" id='btnswitch' style={{backgroundColor:"#432382", color:"white", marginTop:'5px'}}>{btnStatus}</button>

@@ -61,6 +61,12 @@ export default function GenerateInvoice({cart,setCart,dbpath,vsb}) {
       {
          result = await axios.get(dbpath+"invoicefetch.php?qrid="+qrid);
       } 
+      if (!result.data.phpresult || result.data.phpresult.length === 0) {
+      
+        alert("Invalid QR ID. Please enter a valid QR ID.");
+        return;
+
+      }
       
       setArtifact(result.data.phpresult);
     

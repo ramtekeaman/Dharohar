@@ -22,7 +22,7 @@ export default function Success({dbpath,qrid,vsb}) {
     const result   = await axios.get(dbpath+"display.php?id="+qrid);
     setArtifact(result.data.phpresult);
     console.log(result.data.phpresult); 
-    let str = "http://test2.royalswebtech.com/Display/"+qrid;
+    let str = "http://localhost/archaeoshop//Display/"+qrid;
     console.log(str);
     setValue(str);
      setName(result.data.phpresult[0]['name']);

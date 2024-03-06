@@ -30,38 +30,49 @@ export default function PInvoice({dbpath,vsb}) {
           }
       }, [isUserLoggedIn]);    
 
-  const fetchData = async() => { 
-    const result = await axios.get(dbpath+"getPInvoice.php?id="+InvoiceNo);
-    console.log(dbpath+"getPInvoice.php?id="+InvoiceNo);
-    console.log(result.data.phpresult);
-    setCart(result.data.phpresult);
-   /*  document.getElementById("p_img").src = "http://localhost/archaeoshop/uploads/"+result.data.phpresult[0]['image']; */
-    document.getElementById("name").innerHTML = result.data.phpresult[0]['name'];
-    document.getElementById("cno").innerHTML = result.data.phpresult[0]['contact']; 
-    document.getElementById("email").innerHTML = result.data.phpresult[0]['email']; 
-    
-    if(result.data.phpresult[0]['invoice_id']<10)
-    {
-      document.getElementById("iid").innerHTML = "0"+result.data.phpresult[0]['invoice_id']; 
-    }
-    else{
-      document.getElementById("iid").innerHTML = result.data.phpresult[0]['invoice_id']; 
-    }
-    /* document.getElementById("pname").innerHTML = result.data.phpresult[0]['pname']; 
-    document.getElementById("pid").innerHTML = result.data.phpresult[0]['pid']; 
-    document.getElementById("price").innerHTML = result.data.phpresult[0]['price']; 
-    document.getElementById("qrid").innerHTML = result.data.phpresult[0]['pqrid'];  */
-    document.getElementById("pprice").innerHTML = priceFormat(result.data.phpresult[0]['price']); 
-    document.getElementById("gst").innerHTML = result.data.phpresult[0]['gst']; 
-   /*  document.getElementById("discount").innerHTML = result.data.phpresult[0]['discount']; 
-    if(result.data.phpresult[0]['discount']==='0')
-    {
-        console.log('worked');
-        document.getElementById('discdiv').style.display= "none";
-    } */
-    document.getElementById("fprice").innerHTML = priceFormat(result.data.phpresult[0]['fprice']); 
-    document.getElementById("timestamp").innerHTML = result.data.phpresult[0]['timestamp']; 
-}
+      const fetchData = async () => {
+        try {
+          const result = await axios.get(dbpath + "getPInvoice.php?id=" + InvoiceNo);
+          console.log(dbpath + "getPInvoice.php?id=" + InvoiceNo);
+          console.log(result.data.phpresult);
+          
+          setCart(result.data.phpresult);
+      
+          /* document.getElementById("p_img").src = "http://localhost/archaeoshop/uploads/" + result.data.phpresult[0]['image']; */
+          document.getElementById("name").innerHTML = result.data.phpresult[0]['name'];
+          document.getElementById("cno").innerHTML = result.data.phpresult[0]['contact'];
+          document.getElementById("email").innerHTML = result.data.phpresult[0]['email'];
+      
+          if (result.data.phpresult[0]['invoice_id'] < 10) {
+            document.getElementById("iid").innerHTML = "0" + result.data.phpresult[0]['invoice_id'];
+          } else {
+            document.getElementById("iid").innerHTML = result.data.phpresult[0]['invoice_id'];
+          }
+      
+          /* document.getElementById("pname").innerHTML = result.data.phpresult[0]['pname']; 
+          document.getElementById("pid").innerHTML = result.data.phpresult[0]['pid']; 
+          document.getElementById("price").innerHTML = result.data.phpresult[0]['price']; 
+          document.getElementById("qrid").innerHTML = result.data.phpresult[0]['pqrid'];  */
+      
+          document.getElementById("pprice").innerHTML = priceFormat(result.data.phpresult[0]['price']);
+          document.getElementById("gst").innerHTML = result.data.phpresult[0]['gst'];
+      
+          /* document.getElementById("discount").innerHTML = result.data.phpresult[0]['discount']; 
+          if(result.data.phpresult[0]['discount']==='0')
+          {
+              console.log('worked');
+              document.getElementById('discdiv').style.display= "none";
+          } */
+      
+          document.getElementById("fprice").innerHTML = priceFormat(result.data.phpresult[0]['fprice']);
+          document.getElementById("timestamp").innerHTML = result.data.phpresult[0]['timestamp'];
+        } catch (error) {
+          // Handle the error here
+          console.error("Error fetching data:", error);
+          alert("Please, Enter Correct Invoice id");
+        }
+      }
+      
 
 const priceFormat = (price) => {
   price=price.toString();

@@ -46,18 +46,26 @@ export default function UpdateQuantity({dbpath, vsb}) {
     } 
        else {
       
-      const url = dbpath+'updateQuantity.php';
-      let fData = new FormData();
-      fData.append('id', qrid);
-      fData.append('quantity', quantity);
-      axios.post(url, fData)
-        .then(response => alert(response.data))
-        .catch(error => {
-          console.log(error.toJSON());
-        });
+        const url = dbpath + 'updateQuantity.php';
+let fData = new FormData();
+fData.append('id', qrid);
+fData.append('quantity', quantity);
 
-      }
-  }
+axios.post(url, fData)
+  .then(response => {
+    if (response.data === 'Update successful') {
+      alert('Update successful');
+    } else if (response.data === 'ID not found') {
+      alert('ID not found');
+    } else {
+      alert('An error occurred while updating the quantity');
+    }
+  })
+  .catch(error => {
+    console.log(error.toJSON());
+    alert('An error occurred while updating the quantity');
+  });
+       }}
 
   return (
     <>
